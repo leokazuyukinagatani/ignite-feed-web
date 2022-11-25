@@ -1,6 +1,9 @@
 import styles from "./Post.module.css";
+import { useState } from "react";
+import { Comment } from "./Comment";
 
 export function Post() {
+  const[comment, setComment] = useState('');
   return (
     <article className={styles.post}>
       <header>
@@ -40,9 +43,17 @@ export function Post() {
         <strong>Deixe seu feedback</strong>
         <textarea
           placeholder="Deixe um comentário"
+          value={comment}
+          onChange={e => setComment(e.target.value)}
         />
-        <button type="submit">Comentar</button>
+        {
+          comment && 
+          <button type="submit">Publicar</button>
+        }
       </form>
+      <div className={styles.commentList}>
+        <Comment/>
+      </div>
     </article>
   );
 }
