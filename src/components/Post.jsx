@@ -9,7 +9,7 @@ import { formatDistanceToNow } from "date-fns/esm";
 
 export function Post({ author, publishedAt, content }) {
   const [comments, setComments] = useState([]);
-  const [comment, setComment] = useState("");
+  const [newComment, setNewComment] = useState("");
   const publishedDateFormatted = format(
     publishedAt,
     "dd 'de' LLLL 'ás' HH:mm'h'",
@@ -22,11 +22,15 @@ export function Post({ author, publishedAt, content }) {
     addSuffix: true,
   });
 
+  function handleNewCommentChange(event) {
+    setNewComment(event.target.value);
+  }
+
   function handleCreateNewComment(event) {
     event.preventDefault();
     console.log("oi");
-    setComments([...comments, comment]);
-    setComment("");
+    setComments([...comments, newComment]);
+    setNewComment("");
   }
 
   return (
@@ -65,14 +69,14 @@ export function Post({ author, publishedAt, content }) {
         <strong>Deixe seu feedback</strong>
         <textarea
           placeholder="Deixe um comentário"
-          value={comment}
-          onChange={(e) => setComment(e.target.value)}
+          value={newComment}
+          onChange={handleNewCommentChange}
         />
-        {comment && <button type="submit">Publicar</button>}
+        {newComment && <button type="submit">Publicar</button>}
       </form>
       <div className={styles.commentList}>
         {comments.map((comment) => (
-          <Comment content={comment}/>
+          <Comment content={comment} />
         ))}
       </div>
     </article>
