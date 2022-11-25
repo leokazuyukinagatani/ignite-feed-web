@@ -1,6 +1,7 @@
 import styles from "./Post.module.css";
 import { useState } from "react";
 import { Comment } from "./Comment";
+import { Avatar } from "./Avatar";
 
 export function Post() {
   const[comment, setComment] = useState('');
@@ -8,11 +9,7 @@ export function Post() {
     <article className={styles.post}>
       <header>
         <div className={styles.author}>
-          <img
-            className={styles.avatar}
-            src="https://github.com/leokazuyukinagatani.png"
-            alt=""
-          />
+          <Avatar src="https://github.com/leokazuyukinagatani.png"/>
           <div className={styles.authorInfo}>
             <strong>Leo Kazuyuki Nagatani</strong>
             <span>Web Developer</span>
